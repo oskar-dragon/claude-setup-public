@@ -6,7 +6,7 @@ Personal configuration and development preferences for Claude Code CLI.
 
 ```bash
 # Configuration is automatically loaded by Claude Code
-claude-code --help
+claude --help
 ```
 
 ## Agentic Prompt Guidelines
