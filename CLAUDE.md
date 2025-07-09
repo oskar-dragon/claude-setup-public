@@ -64,7 +64,6 @@ For large tasks (e.g., refactoring multiple modules, fixing many lint errors), u
 - Run single, targeted tests over full suites for performance.
 - Use semantic commit messages (`feat:`, `fix:`, `docs:`, etc.).
 - Format code before committing.
-- Use TestContainers for integration tests.
 
 #### TypeScript
 
