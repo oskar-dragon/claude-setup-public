@@ -79,7 +79,6 @@ STEP 4: Validate and format
 
 - Ensure YAML front matter is valid
 - Verify all bash commands in allowed-tools
-- Run: deno fmt {filepath}
 - Confirm improvements follow best practices
 
 STEP 5: Mark task as completed using task manager
@@ -91,8 +90,6 @@ STEP 5: Mark task as completed using task manager
   - stateManagementAdded
   - extendedThinkingAdded
   - subAgentPatternsAdded
-
-- COMPLETE_RESULT: !`deno run --allow-read --allow-write notes/improve-slash-commands/task-manager.ts complete --command-id COMMAND_ID --session-id SESSION_ID --improvement frontMatterAdded --improvement dynamicContextAdded`
 
 IF COMPLETE_RESULT indicates failure:
 
@@ -309,61 +306,6 @@ Example safe pattern:
 ```bash
 !`command 2>/dev/null || echo "default value"`
 ```
-
-## Concurrent Execution Pattern
-
-### Deno-Based Task Management System
-
-This command now uses a robust Deno-based task management system for safe parallel execution:
-
-1. **Launch Multiple Sessions** (each works on exactly one command):
-
-   ```bash
-   # Terminal 1
-   claude code
-   > /improve-slash-commands
-   # Claims command 029, works on it, completes it, exits
-
-   # Terminal 2
-   claude code
-   > /improve-slash-commands
-   # Claims command 030, works on it, completes it, exits
-
-   # Terminal 3
-   claude code
-   > /improve-slash-commands
-   # Claims command 031, works on it, completes it, exits
-   ```
-
-2. **True Atomic Claiming**:
-   - File-based locking using Deno's exclusive write operations
-   - Each agent claims exactly ONE command per session
-   - Conflict detection ensures no double-claiming
-   - Automatic cleanup of stale claims (>10 minutes)
-
-3. **Robust Task Manager Features**:
-   - Claims older than 10 minutes automatically become reclaimable
-   - Graceful handling of crashed or disconnected agents
-   - Comprehensive error handling and validation
-   - Status reporting and progress tracking
-
-4. **Task Manager Commands**:
-
-   ```bash
-   # Claim next available task
-   deno run --allow-read --allow-write task-manager.ts claim
-
-   # Mark task as completed
-   deno run --allow-read --allow-write task-manager.ts complete \
-     --command-id ID --session-id SESSION \
-     --improvement frontMatterAdded --improvement dynamicContextAdded
-
-   # Check status
-   deno run --allow-read --allow-write task-manager.ts status
-
-   # Clean up stale claims
-   deno run --allow-read --allow-write task-manager.ts cleanup
-   ```
 
 ### Coordination Best Practices
 
