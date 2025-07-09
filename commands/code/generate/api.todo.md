@@ -70,35 +70,11 @@ Use sub-agents for parallel development to optimize implementation time:
 
 Implement endpoint based on detected framework:
 
-**Spring Boot (Java):**
-
-```java
-@RestController
-@RequestMapping("/api/v1")
-public class Controller {
-    @PostMapping("/resource")
-    public ResponseEntity<Response> create(@Valid @RequestBody Request req) {
-        // Implementation
-    }
-}
-```
-
 **ConnectRPC (Go):**
 
 ```go
 func (s *Server) Method(ctx context.Context,
     req *connect.Request[pb.Request]) (*connect.Response[pb.Response], error) {
-    // Implementation
-}
-```
-
-**Axum (Rust):**
-
-```rust
-async fn handler(
-    State(state): State<AppState>,
-    Json(payload): Json<Request>,
-) -> Result<Json<Response>, StatusCode> {
     // Implementation
 }
 ```
@@ -125,18 +101,6 @@ STEP 5: Comprehensive Test Generation
 
 Generate extensive test suite covering all scenarios:
 
-**Java (JUnit/MockMvc):**
-
-```java
-@Test
-void testEndpoint() throws Exception {
-    mockMvc.perform(post("/api/v1/resource")
-        .contentType(MediaType.APPLICATION_JSON)
-        .content(jsonRequest))
-        .andExpect(status().isOk());
-}
-```
-
 **Go (testing package):**
 
 ```go
@@ -145,17 +109,6 @@ func TestEndpoint(t *testing.T) {
     w := httptest.NewRecorder()
     handler(w, req)
     assert.Equal(t, http.StatusOK, w.Code)
-}
-```
-
-**Rust (axum-test):**
-
-```rust
-#[tokio::test]
-async fn test_endpoint() {
-    let app = create_app();
-    let response = app.oneshot(request).await.unwrap();
-    assert_eq!(response.status(), StatusCode::OK);
 }
 ```
 
@@ -181,9 +134,8 @@ STEP 7: Database and Service Integration
 
 Framework-specific database integration:
 
-- **Java**: JPA/Hibernate, JOOQ, MyBatis with connection pooling
 - **Go**: sqlx, GORM, Ent with connection pooling
-- **Node.js**: Prisma, TypeORM, Sequelize
+- **Node.js**: Prisma
 
 Implementation details:
 
@@ -194,43 +146,6 @@ Implementation details:
 - Consider event sourcing with RedPanda (preferred over Kafka)
 - Implement database transaction management
 - Add database monitoring and performance metrics
-
-STEP 8: State Management and Progress Tracking
-
-```json
-// /tmp/api-generation-$SESSION_ID.json
-{
-  "sessionId": "$SESSION_ID",
-  "timestamp": "ISO_8601_TIMESTAMP",
-  "target": "$ARGUMENTS",
-  "phase": "implementation",
-  "detectedFramework": "detected_framework",
-  "generatedArtifacts": {
-    "endpoint": "path/to/endpoint/file",
-    "tests": "path/to/test/file",
-    "documentation": "path/to/docs/file",
-    "migrations": "path/to/migration/file"
-  },
-  "subAgents": {
-    "implementation": "completed",
-    "testing": "in_progress",
-    "documentation": "pending",
-    "database": "pending",
-    "security": "completed"
-  },
-  "checkpoints": {
-    "lastCheckpoint": "security_implementation_complete",
-    "nextMilestone": "comprehensive_testing",
-    "rollbackPoint": "initial_analysis"
-  },
-  "metrics": {
-    "linesOfCode": 247,
-    "testCoverage": "94%",
-    "securityScore": "A",
-    "performanceRating": "excellent"
-  }
-}
-```
 
 ## Final Output
 
