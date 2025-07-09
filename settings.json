@@ -1,0 +1,70 @@
+{
+  "permissions": {
+    "deny": [
+      "Bash(curl:*)",
+      "Bash(rm:*)",
+      "Edit(node_modules/**)",
+      "Read(.env.*)",
+      "Read(*.key)",
+      "Bash(sudo *)",
+      "Edit(.env)",
+      "Edit(.env.*)",
+      "Edit(*.secret)",
+      "Edit(*.key)",
+      "Read(.env)",
+      "Read(.env.local)"
+    ]
+  },
+  "env": {
+    "CLAUDE_CODE_ENABLE_TELEMETRY": "0",
+    "DISABLE_AUTOUPDATER": "0",
+    "EDITOR": "zed",
+    "GIT_EDITOR": "zed --wait"
+  },
+  "ignorePatterns": [
+    "node_modules/**",
+    ".pnpm-store/**",
+    "yarn.lock",
+    "package-lock.json",
+
+    "dist/**",
+    "build/**",
+    ".next/**",
+    ".nuxt/**",
+    ".output/**",
+    "coverage/**",
+    ".nyc_output/**",
+
+    "*.tsbuildinfo",
+    "*.d.ts.map",
+
+    ".vite/**",
+    ".webpack/**",
+    ".parcel-cache/**",
+    ".rollup.cache/**",
+
+    "test-results/**",
+    "playwright-report/**",
+    "cypress/videos/**",
+    "cypress/screenshots/**",
+
+    "*.log",
+    "*.tmp",
+    ".DS_Store",
+    "Thumbs.db",
+
+    ".env*",
+    "!.env.example",
+
+    ".vscode/**",
+    ".idea/**",
+    "*.swp",
+    "*.swo"
+  ],
+  "theme": "dark",
+  "preferredNotifChannel": "terminal_bell",
+  "verbose": true,
+  "cleanupPeriodDays": 90,
+  "includeCoAuthoredBy": false,
+  "mcpServers": {}
+}
